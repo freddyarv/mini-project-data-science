@@ -1,0 +1,50 @@
+version: '3'
+services:
+  # Database Service
+  database:
+    image: postgres:latest
+    container_name: my_database
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: dataengineer
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: barabai123
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  # Crawling Service
+  crawling:
+    build:
+      context: ./Crawling
+    depends_on:
+      - database
+
+  # Preprocessing Service
+  preprocessing:
+    build:
+      context: ./Database
+    depends_on:
+      - database
+
+  # Machine Learning Service
+  machine_learning:
+    build:
+      context: ./Model
+    depends_on:
+      - preprocessing
+
+  # API Service
+  api:
+    build:
+      context: ./Api
+    depends_on:
+      - machine_learning
+    ports:
+      - "5000:5000"
+    environment:
+      FLASK_APP: app.py
+      FLASK_RUN_HOST: 0.0.0.0
+
+volumes:
+  postgres_data:

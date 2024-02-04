@@ -1,0 +1,42 @@
+# How to Run
+
+install:
+python & pip
+Docker
+
+## 1. Crawling
+
+### a. Crawling Data
+1. Navigate to the Crawling directory: `cd Mini Project Data Science/Crawling`
+2. Build the Crawling Docker image: `docker build -t crawling-image -f Dockerfile .`
+3. Run the Crawling Docker container: `docker run crawling-image`
+
+## 2. Database
+
+### a. Setup Database
+1. Navigate to the Database directory: `cd Mini Project Data Science/Database`
+2. Build the Database Docker image: `docker build -t database-image -f Dockerfile .`
+3. Create and configure the Docker container: `docker-compose up`
+
+## 3. Model
+
+### a. Train the Model
+1. Navigate to the Model directory: `cd Mini Project Data Science/Model`
+2. Build the Model Docker image: `docker build -t model-image -f Dockerfile .`
+3. Run the model training script: `docker run model-image`
+
+## 4. API
+
+### a. Run the API
+1. Navigate to the Api directory: `cd Mini Project Data Science/Api`
+2. Build the API Docker image: `docker build -t api-image -f Dockerfile .`
+3. Run the API Docker container: `docker run -p 5000:5000 api-image`
+4. The API will be accessible at: `http://localhost:5000`
+
+## 5. Request
+
+### a. Make API Requests
+1. Open a new terminal or command prompt
+2. Navigate to the Api directory: `cd Mini Project Data Science/Api`
+3. Run the request script: `python request.py`
+
